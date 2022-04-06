@@ -14,4 +14,7 @@ class Songs {
   get numberOfSongs() {
     return this.songs.length;
   }
+  get files() {
+    return this.songs.map((a) => a.file);
+  }
 }

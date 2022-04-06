@@ -1,24 +1,17 @@
-let imgBackground;
-let player = new Player();
+
+let soundtrack = new Database();
 
 function preload() {
- 
-  //player.preloadSong();
  
 }
 
 function setup() {
   let canva = createCanvas(1098, 627);
- canva.mousePressed(canvasPressed);
- // imgBackground = createImg("resources/background.png");
- // imgBackground.position(0, 0);
- 
-  player.arrayOfSongs();
-  // database.doSomething();
+  soundtrack.arrayOfSongs();
+  console.log(player.getFile())
+
 }
 function draw() {
- // imgBackground;
+ 
 }
-function canvasPressed() {
-  player.playSong();
-}
+
