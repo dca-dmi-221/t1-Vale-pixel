@@ -1,4 +1,4 @@
-class Player {
+class Database {
   constructor() {
     this.database = new Songs();
   }
@@ -31,10 +31,21 @@ class Player {
       file: "sounds/tommyFourSeven-OX1.mp3",
     });
   }
+  getData() {
+    return this.database.allSongs;
+  }
 
   getFile() {
-    let i = this.database.allSongs
-    return i.map((a) => a.file)
+    let i = this.database.allSongs;
+    return i.map((a) => a.file);
   }
- 
+
+  getName() {
+    let i = this.database.allSongs;
+    return i.map((a) => a.name);
+  }
+  getArtist() {
+    let i = this.database.allSongs;
+    return i.map((a) => a.artist);
+  }
 }
