@@ -1,3 +1,17 @@
+let WIDTH = 1366;
+let HEIGHT = 685;
+this.bar = {
+  x: 462,
+  y: 628,
+  w: 442,
+  h: 6,
+};
+this.control = {
+  x: 462,
+  y: 632,
+  r: 9,
+};
+
 let soundtrack = new Database();
 let imgBackground;
 let playImg;
@@ -11,7 +25,7 @@ let getName;
 let getArtist;
 
 songs = [];
-songNames = [];
+getNames = [];
 index = 0;
 let indexSong = 0;
 let volume;
@@ -28,7 +42,7 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(1366, 685);
+  createCanvas(WIDTH, HEIGHT);
 
   getName = soundtrack.getName();
   getArtist = soundtrack.getArtist();
@@ -46,12 +60,12 @@ function setup() {
 
   previousButton = createButton('<i class="material-icons">skip_previous</i>');
   previousButton.mousePressed(prevSong);
-  previousButton.position(530, 568);
+  previousButton.position(540, 568);
   previousButton.child('<i class="material-icons">cloud</i>');
 
   botonNext = createButton('<i class="material-icons">skip_next</i>');
   botonNext.mousePressed(nextSong);
-  botonNext.position(730, 568);
+  botonNext.position(720, 568);
 
   volume = createSlider(0, 1, 0.5, 0.01);
   volume.position(1174, 640);
@@ -60,12 +74,35 @@ function setup() {
   });
 }
 function draw() {
-  /*
   textSize(24);
-  text(getNames[indexSong], width / 2, height / 2);*/
+  text(getNames[indexSong], width / 2, height / 2);
   songs[indexSong].setVolume(volume.value());
+  noStroke();
+  fill(251, 249, 255, 34);
+  rect(this.bar.x, this.bar.y, this.bar.w, this.bar.h);
+  fill(193, 185, 205);
+  ellipse(this.control.x, this.control.y, this.control.r * 2);
 }
-
+function mouseDragged() {
+  if (dist(mouseX, mouseY, this.control.x, this.control.y) < this.control.r) {
+    const bonderies = {
+      x1: this.bar.x,
+      x2: this.bar.x + this.bar.w,
+    };
+    const isInRange = mouseX > bonderies.x1 && mouseX < bonderies.x2;
+    if (isInRange) {
+      this.control.x = mouseX;
+      const head = map(
+        mouseX,
+        bonderies.x1,
+        bonderies.x2,
+        0,
+        songs[indexSong].duration()
+      );
+      songs[indexSong].jump(head);
+    }
+  }
+}
 function Play() {
   songs[indexSong].play();
 }
