@@ -74,12 +74,18 @@ function setup() {
   });
 }
 function draw() {
-  textSize(24);
-  text(getNames[indexSong], width / 2, height / 2);
+  /*
+  getName.forEach((nsme) => {
+    textSize(24);
+    nsme.push(text(getNames[indexSong], width / 2, height / 2));
+  });
+*/
+  //volume
   songs[indexSong].setVolume(volume.value());
+
   noStroke();
   fill(251, 249, 255, 34);
-  rect(this.bar.x, this.bar.y, this.bar.w, this.bar.h);
+  rect(this.bar.x, this.bar.y, this.bar.w, this.bar.h, 5);
   fill(193, 185, 205);
   ellipse(this.control.x, this.control.y, this.control.r * 2);
 }
@@ -137,10 +143,4 @@ function currentTimeSong() {
     a.currentTime();
     console.log(a.currenTime);
   });
-}
-
-function updateProgress(e) {
-  const { duration, currentTime } = e.srcElement;
-  const progressPercent = (currentTime / duration) * 100;
-  progress.style.width = `${progressPercent}%`;
 }
